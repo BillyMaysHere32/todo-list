@@ -4,10 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ToDo List</title>
 </head>
 <body>
-    <div id="content"></div>
+    <div id="content">
+        <div class="form-heading">
+            <h1>Add New Book To Library</h1>
+        </div>
+        <div class="books-heading">
+            <h1>Current Books in Library</h1>
+        </div>
+        <div class="form">
+            <button class="add-todo-button">Add New Book</button>
+            <div id="add-todo-form" style="display:none">
+                <form id="add-todo">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description">
+                    <label for="due-date">Due Date</label>
+                    <input type="text" id="due-date" name="due-date">
+                    <label for="priority">Priority</label>
+                    <select id="priority" name="priority">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </form>
+                <button type="submit" class="submit-button">Submit Task</button>
+                <button type="reset" class="reset-button">Reset Form</button>
+            </div>
+        </div>
+        <div class="todos">
+        </div>
+    </div>
     <script src="main.js"></script>
     
 </body>
