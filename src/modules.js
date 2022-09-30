@@ -51,14 +51,45 @@ var form = document.createElement("form");
 
     // submit logic 
     const submitButton = document.querySelector('.submit-button');
-    submitButton.addEventListener('click', intakeFormData);
+    submitButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        intakeFormData();
+    });
+
     function intakeFormData() {
         let title = document.getElementById('title').value;
         let description = document.getElementById('description').value;
         let dueDate = document.getElementById('dueDate').value;
-        console.log(title)
-        console.log(description)
-        console.log(dueDate)
+        // console.log(title);
+        // console.log(description);
+        // console.log(dueDate);
+
+        if ((title == "") || (description == "") || (dueDate == "")) {
+            alert('Please fill out all fields');
+            return;
+        }
+        addTasksToLibrary(title, description, dueDate);
+        // document.getElementById('add-book').reset();
+        console.log(myTasks);
     }
 
 }
+
+let myTasks= [];
+
+function Task(title, description, dueDate) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+
+    // console.log(title);
+    // console.log(description);
+    // console.log(dueDate);
+}
+
+function addTasksToLibrary(title, description, dueDate) {
+    let book = new Task(title, description, dueDate);
+    myTasks.push(book);
+    // displayBooksOnPage();
+}
+
