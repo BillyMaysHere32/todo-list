@@ -4,16 +4,19 @@ export function initializeWebsite() {
     const content = document.getElementById('content');
     content.replaceChildren();
 
-    content.appendChild(createTitle("five 4 3 2 1"));
+    content.appendChild(createTitle("To Do List"));
    
-    content.appendChild(createParagraph("test."));
+    createFormButton();
 
+    
+}
+
+function createFormButton() {
     var newTaskButton = document.createElement("button");
     newTaskButton.textContent = "New Task";
     content.appendChild(newTaskButton);
     newTaskButton.addEventListener("click", displayTheForm);
 
-    
 }
 
 function createParagraph(text) {

@@ -1,7 +1,7 @@
 export function displayTheForm() {
 var form = document.createElement("form");
-    form.setAttribute('method',"post");
-    //form.setAttribute('action',"submit.php");
+    // form.setAttribute('method',"post");
+    // form.setAttribute('action',"submit.php");
     
     //create input element
     var title = document.createElement("input");
@@ -18,8 +18,8 @@ var form = document.createElement("form");
 
     var dueDate = document.createElement("input");
     dueDate.type = "text";
-    dueDate.name = "task_name";
-    dueDate.id = "task_name";
+    dueDate.name = "dueDate";
+    dueDate.id = "dueDate";
     dueDate.placeholder = "Due Date";
     
     //create a checkbox
@@ -28,10 +28,15 @@ var form = document.createElement("form");
     checkbox.id = "checkbox";
     checkbox.name = "checkbox";
     
-    //create a button
-    var submit = document.createElement("input");
+    //create a submit button
+    // var submit = document.createElement("input");
+    // submit.type = "submit";
+    // submit.value = "Submit";
+
+    var submit = document.createElement("button");
     submit.type = "submit";
-    submit.value = "Submit";
+    submit.textContent = "Submit";
+    submit.classList.add('submit-button')
     
     // add all elements to the form
     form.appendChild(title);
@@ -42,5 +47,18 @@ var form = document.createElement("form");
     
     // add the form inside the body
     document.getElementsByTagName('body')[0].appendChild(form);
+
+
+    // submit logic 
+    const submitButton = document.querySelector('.submit-button');
+    submitButton.addEventListener('click', intakeFormData);
+    function intakeFormData() {
+        let title = document.getElementById('title').value;
+        let description = document.getElementById('description').value;
+        let dueDate = document.getElementById('dueDate').value;
+        console.log(title)
+        console.log(description)
+        console.log(dueDate)
+    }
 
 }
