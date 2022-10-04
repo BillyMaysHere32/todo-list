@@ -22,6 +22,28 @@ var form = document.createElement("form");
     dueDate.name = "dueDate";
     dueDate.id = "dueDate";
     dueDate.placeholder = "Due Date";
+
+    //create priotity dropdown
+    var priorityList = document.createElement("select");
+    priorityList.name = "priorityList";
+    priorityList.id = "priorityList";
+
+    var priorityLabel = document.createElement("Label");
+    priorityLabel.setAttribute("for", 'priorityList');
+    priorityLabel.innerHTML = "Priority";
+    
+    
+    var opt = document.createElement('option');
+    opt.innerHTML = 'Low';
+    priorityList.appendChild(opt);
+
+    var opt = document.createElement('option');
+    opt.innerHTML = 'Medium';
+    priorityList.appendChild(opt);
+
+    var opt = document.createElement('option');
+    opt.innerHTML = 'High';
+    priorityList.appendChild(opt);
     
     //create a checkbox
     var checkbox = document.createElement("input");
@@ -43,8 +65,13 @@ var form = document.createElement("form");
     form.appendChild(title);
     form.appendChild(description);
     form.appendChild(dueDate);
+    form.appendChild(priorityLabel);
+    form.appendChild(priorityList);
     form.appendChild(checkbox);
     form.appendChild(submit);
+
+    
+
     
     // add the form inside the body
     document.getElementsByTagName('body')[0].appendChild(form);
