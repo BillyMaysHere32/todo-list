@@ -1,5 +1,6 @@
 export function displayTheForm() {
 var form = document.createElement("form");
+    form.id = "form";
     // form.setAttribute('method',"post");
     // form.setAttribute('action',"submit.php");
     
@@ -55,25 +56,25 @@ var form = document.createElement("form");
         e.preventDefault();
         intakeFormData();
     });
-
-    function intakeFormData() {
-        let title = document.getElementById('title').value;
-        let description = document.getElementById('description').value;
-        let dueDate = document.getElementById('dueDate').value;
-        // console.log(title);
-        // console.log(description);
-        // console.log(dueDate);
-
-        if ((title == "") || (description == "") || (dueDate == "")) {
-            alert('Please fill out all fields');
-            return;
-        }
-        addTasksToLibrary(title, description, dueDate);
-        // document.getElementById('add-book').reset();
-        console.log(myTasks);
-    }
-
+ 
 }
+
+function intakeFormData() {
+    let title = document.getElementById('title').value;
+    let description = document.getElementById('description').value;
+    let dueDate = document.getElementById('dueDate').value;
+    // console.log(title);
+    // console.log(description);
+    // console.log(dueDate);
+
+    if ((title == "") || (description == "") || (dueDate == "")) {
+        alert('Please fill out all fields');
+        return;
+    }
+    addTasksToLibrary(title, description, dueDate);
+    document.getElementById('form').reset();
+}
+
 
 let myTasks= [];
 
@@ -88,8 +89,30 @@ function Task(title, description, dueDate) {
 }
 
 function addTasksToLibrary(title, description, dueDate) {
-    let book = new Task(title, description, dueDate);
-    myTasks.push(book);
-    // displayBooksOnPage();
+    let task = new Task(title, description, dueDate);
+    myTasks.push(task);
+    displayTasksOnPage();
+}
+
+function displayTasksOnPage() {
+
+    const removeCards = document.querySelectorAll('.card');
+    for (let i = 0; i < removeCards.length; i++) {
+        removeCards[i].remove();
+    }
+
+    let index = 0;
+    myTasks.forEach(task => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        content.appendChild(card);
+       
+        for (let key in task) {
+            const para = document.createElement('p');
+            para.textContent = (`${key}: ${task[key]}`);
+            card.appendChild(para);
+        }
+        index++;
+    })
 }
 
