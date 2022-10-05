@@ -1,23 +1,29 @@
 import { displayTheForm } from "./modules";
-import { myTasks } from "./modules";
+
 
 export function initializeWebsite() {
     const content = document.getElementById('content');
     content.replaceChildren();
 
     content.appendChild(createTitle("To Do List"));
+    
+    // create dive for form
+    const formDiv = document.createElement("div");
+    formDiv.classList.add('form-div')
+    content.appendChild(formDiv);
    
     createFormButton();
-
-
 }
 
 function createFormButton() {
+    var form = document.querySelector('.form-div');
     var newTaskButton = document.createElement("button");
     newTaskButton.textContent = "New Task";
-    content.appendChild(newTaskButton);
-    newTaskButton.addEventListener("click", displayTheForm);
-
+    form.appendChild(newTaskButton);
+    newTaskButton.addEventListener("click", function(e) {
+        //form.replaceChildren();
+        displayTheForm(); 
+    }); 
 }
 
 function createParagraph(text) {

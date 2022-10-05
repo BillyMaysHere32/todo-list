@@ -33,29 +33,21 @@ var form = document.createElement("form");
     priorityLabel.innerHTML = "Priority";
     
     
-    var opt = document.createElement('option');
-    opt.innerHTML = 'Low';
-    priorityList.appendChild(opt);
+    var optLow = document.createElement('option');
+    optLow.innerHTML = 'Low';
+    priorityList.appendChild(optLow);
 
-    var opt = document.createElement('option');
-    opt.innerHTML = 'Medium';
-    priorityList.appendChild(opt);
-
-    var opt = document.createElement('option');
-    opt.innerHTML = 'High';
-    priorityList.appendChild(opt);
+    var optHigh = document.createElement('option');
+    optHigh.innerHTML = 'High';
+    priorityList.appendChild(optHigh);
     
     //create a checkbox
-    var checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = "checkbox";
-    checkbox.name = "checkbox";
+    // var checkbox = document.createElement("input");
+    // checkbox.type = "checkbox";
+    // checkbox.id = "checkbox";
+    // checkbox.name = "checkbox";
     
     //create a submit button
-    // var submit = document.createElement("input");
-    // submit.type = "submit";
-    // submit.value = "Submit";
-
     var submit = document.createElement("button");
     submit.type = "submit";
     submit.textContent = "Submit";
@@ -67,13 +59,10 @@ var form = document.createElement("form");
     form.appendChild(dueDate);
     form.appendChild(priorityLabel);
     form.appendChild(priorityList);
-    form.appendChild(checkbox);
+    // form.appendChild(checkbox);
     form.appendChild(submit);
 
-    
-
-    
-    // add the form inside the body
+        // add the form inside the body
     document.getElementsByTagName('body')[0].appendChild(form);
 
 
@@ -82,41 +71,46 @@ var form = document.createElement("form");
     submitButton.addEventListener('click', function(e) {
         e.preventDefault();
         intakeFormData();
+        // hide form
+        form.replaceChildren();
     });
- 
 }
 
 function intakeFormData() {
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
     let dueDate = document.getElementById('dueDate').value;
-    // console.log(title);
-    // console.log(description);
+    let priorityList = document.getElementById('priorityList').value;
+    // let checkbox = document.getElementById('checkbox').value;
+    // console.log(checkbox);
     // console.log(dueDate);
 
-    if ((title == "") || (description == "") || (dueDate == "")) {
+    if ((title == "") || (description == "") || (dueDate == "") || (priorityList == "")) {
         alert('Please fill out all fields');
         return;
     }
-    addTasksToLibrary(title, description, dueDate);
+    addTasksToLibrary(title, description, dueDate, priorityList);
     document.getElementById('form').reset();
 }
 
 
 let myTasks= [];
+let completed= [];
 
-function Task(title, description, dueDate) {
+
+function Task(title, description, dueDate, priorityList) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
+    this.priorityList = priorityList;
 
-    // console.log(title);
+    //console.log(priorityList);
     // console.log(description);
     // console.log(dueDate);
 }
 
-function addTasksToLibrary(title, description, dueDate) {
-    let task = new Task(title, description, dueDate);
+function addTasksToLibrary(title, description, dueDate, priorityList) {
+    let task = new Task(title, description, dueDate, priorityList);
     myTasks.push(task);
     displayTasksOnPage();
 }
@@ -139,6 +133,28 @@ function displayTasksOnPage() {
             para.textContent = (`${key}: ${task[key]}`);
             card.appendChild(para);
         }
+
+        // var completedLabel = document.createElement("Label");
+        // completedLabel.setAttribute("for", 'checkbox');
+        // completedLabel.innerHTML = "Completed";
+
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = "checkbox";
+        checkbox.name = "checkbox";
+        card.appendChild(checkbox);
+
+        checkbox.dataset.linkedArray = index;
+        checkbox.addEventListener('click', moveToCompleted);
+        function moveToCompleted() {
+            let completedTask = checkbox.dataset.linkedArray;
+            myTasks.splice(parseInt(completedTask), 1);
+            completed.push(task);
+            
+            displayTasksOnPage();
+            console.log(completed);
+        }
+
         index++;
     })
 }
