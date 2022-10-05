@@ -150,12 +150,50 @@ function displayTasksOnPage() {
             let completedTask = checkbox.dataset.linkedArray;
             myTasks.splice(parseInt(completedTask), 1);
             completed.push(task);
-            
+            //displayCompletedTasks();
             displayTasksOnPage();
-            console.log(completed);
+            //console.log(completed);
         }
 
         index++;
     })
 }
+
+// function displayCompletedTasks() {
+//     const removeCardsC = document.querySelectorAll('.cardC');
+//     for (let i = 0; i < removeCardsC.length; i++) {
+//         removeCardsC[i].remove();
+//     }
+
+//     let index = 0;
+//     completed.forEach(taskC => {
+//         const cardC = document.createElement('div');
+//         cardC.classList.add('cardC');
+//         content.appendChild(cardC);
+       
+//         for (let key in taskC) {
+//             const paraC = document.createElement('p');
+//             paraC.textContent = (`${key}: ${taskC[key]}`);
+//             cardC.appendChild(paraC);
+//         }
+
+//         // var checkbox = document.createElement("input");
+//         // checkbox.type = "checkbox";
+//         // checkbox.id = "checkbox";
+//         // checkbox.name = "checkbox";
+//         // card.appendChild(checkbox);
+
+//         // checkbox.dataset.linkedArray = index;
+//         // checkbox.addEventListener('click', moveToCompleted);
+//         // function moveToCompleted() {
+//         //     let completedTask = checkbox.dataset.linkedArray;
+//         //     myTasks.splice(parseInt(completedTask), 1);
+//         //     myTasks.push(task);
+//             // displayCompletedTasks();
+//             // displayTasksOnPage();
+//             console.log(completed);
+//         }
+
+//         index++;
+//     }
 
